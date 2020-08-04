@@ -113,3 +113,89 @@ INSERT INTO books(author_id, title) VALUES(
     Bash and SQL files
     mysql -u root -p -h localhost -D library < data.sql
 */
+
+--SELECT 
+SELECT name FROM clients;
+
+SELECT name FROM clients LIMIT 2;
+
+SELECT name, email FROM clients WHERE gender = 'M';
+SELECT name, email FROM clients WHERE gender = 'F';
+
+--Functions
+SELECT name, YEAR(birthdate) FROM clients LIMIT 5;
+
+--Current laptop datetime
+SELECT NOW();
+SELECT YEAR(NOW());
+
+SELECT name, YEAR(NOW()) - YEAR(birthdate) FROM clients;
+
+SELECT name, YEAR(NOW()) - YEAR(birthdate) AS age FROM clients
+WHERE name LIKE 'M%' AND gender = 'F';
+
+/* 
+    MySQL provides two wildcard characters for constructing patterns:
+    % -> Matches any string of zero or more characters
+    _ -> Matches any single character
+
+    Source: https://www.mysqltutorial.org/mysql-like/
+*/
+
+SELECT COUNT(*) FROM authors;
+SELECT COUNT(*) FROM books;
+
+SELECT name FROM authors WHERE author_id > 0 AND author_id < 6;
+
+SELECT * FROM books;
+
+--BETWEEN recommended for numbers and dates
+SELECT * FROM books WHERE author_id BETWEEN 1 AND 5;
+
+INSERT INTO books(author_id, title)
+VALUES(2, 'Cien años de soledad'),
+    (2, 'El amor en los tiempos del cólera');
+
+INSERT INTO books(author_id, title)
+VALUES(1, 'Pedro Páramo'),
+    (1, 'El llano en llamas');
+
+
+--JOIN
+SELECT books.title, authors.name
+FROM books JOIN authors ON books.author_id = authors.author_id;
+
+--Multiple INNER JOIN
+SELECT b.title, a.name, c.name, o.type
+FROM operations AS o
+JOIN clients AS c ON o.client_id = c.client_id
+JOIN books AS b ON o.book_id = b.book_id
+JOIN authors AS a ON b.author_id = a.author_id;
+
+--Unexplicit JOIN
+SELECT a.name, b.title
+FROM authors AS a, books AS b
+WHERE b.author_id = a.author_id;
+
+--Explicit JOIN
+SELECT a.name, b.title
+FROM authors AS a
+JOIN books AS b ON b.author_id = a.author_id;
+
+--Left JOIN (pretty useful to know when data does not exist)
+SELECT a.author_id, a.name, a.nationality, COUNT(b.book_id)
+FROM authors AS a
+LEFT JOIN books AS b
+ON a.author_id = b.author_id
+GROUP BY a.author_id
+ORDER BY a.author_id DESC;
+
+
+/*
+    Other JOINs:
+        1. Right Join
+        2. Full Outer Join
+        3. Left Excluding Join
+        4. Right Exluding Join
+        5. Outer Excluding Join
+*/
