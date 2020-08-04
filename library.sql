@@ -199,3 +199,48 @@ ORDER BY a.author_id DESC;
         4. Right Exluding Join
         5. Outer Excluding Join
 */
+
+/* 
+    Business questions
+    1. ¿Qué nacionalidades hay?
+*/
+SELECT DISTINCT nationality FROM authors ORDER BY nationality;
+
+/*
+    2. ¿Cuántos escritores hay de cada nacionalidad?
+*/
+SELECT nationality, COUNT(author_id) AS c_authors FROM authors
+GROUP BY nationality
+ORDER BY c_authors DESC, nationality;
+
+/*
+    3. ¿Cuántos libros hay de cada nacionalidad?
+*/
+SELECT a.nationality, COUNT(b.book_id) FROM authors AS a
+JOIN books AS b ON a.author_id = b.author_id
+GROUP BY a.nationality;
+
+/*
+    4. ¿Cuál es el promedio y desviación estándar del precio de los libros?
+*/ 
+SELECT AVG(price) AS average, STDDEV(price) AS standard_deviation FROM books;
+
+/*
+    5. ídem, pero por nacionalidad
+*/
+SELECT a.nationality, AVG(b.price) AS average, STDDEV(b.price) AS standard_deviation FROM books AS b
+JOIN authors AS a ON a.author_id = b.author_id
+GROUP BY a.nationality
+ORDER BY a.nationality;
+
+/* 
+    6. ¿Cuál es el precio máximo y minímo de un libro?
+*/
+SELECT MAX(price), MIN(price) FROM books;
+
+/*
+    7. ídem, pero por nacionalidad
+*/
+SELECT nationality, MAX(price), MIN(price) FROM books AS b
+JOIN authors AS a ON a.author_id = b.author_id
+GROUP BY nationality;
