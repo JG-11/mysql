@@ -275,3 +275,13 @@ SELECT nationality, COUNT(book_id) AS total, SUM(IF(year <= 1950, 1, 0)) AS '<=1
 FROM books
 JOIN authors ON books.author_id = authors.author_id
 GROUP BY nationality;
+
+--Views (tables from SQL sentences)
+CREATE VIEW books_nationality_year AS
+    SELECT nationality, COUNT(book_id) AS total, SUM(IF(year <= 1950, 1, 0)) AS '<=1950',
+        SUM(IF(year > 1950 AND year <= 2000, 1, 0)) AS '<=2000',
+        SUM(IF(year > 2000, 1, 0)) AS '>2000'
+    FROM books
+    JOIN authors ON books.author_id = authors.author_id
+    GROUP BY nationality;
+SELECT * FROM books_nationality_year;
