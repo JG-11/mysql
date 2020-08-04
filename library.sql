@@ -244,3 +244,10 @@ SELECT MAX(price), MIN(price) FROM books;
 SELECT nationality, MAX(price), MIN(price) FROM books AS b
 JOIN authors AS a ON a.author_id = b.author_id
 GROUP BY nationality;
+
+--Operations report
+SELECT c.name, o.type, b.title, CONCAT(a.name, ' (', a.nationality, ')') AS author, TO_DAYS(NOW()) - TO_DAYS(o.created_at) AS ago
+FROM operations AS o
+LEFT JOIN clients AS c ON o.client_id = c.client_id 
+LEFT JOIN books AS b ON o.book_id = b.book_id
+LEFT JOIN authors AS a ON b.author_id = a.author_id;
