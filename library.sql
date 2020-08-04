@@ -285,3 +285,12 @@ CREATE VIEW books_nationality_year AS
     JOIN authors ON books.author_id = authors.author_id
     GROUP BY nationality;
 SELECT * FROM books_nationality_year;
+
+--ALTER
+ALTER TABLE authors ADD COLUMN age INTEGER UNSIGNED DEFAULT 70 AFTER name;
+
+ALTER TABLE authors MODIFY COLUMN age INTEGER UNSIGNED DEFAULT 80 AFTER name;
+
+ALTER TABLE authors DROP COLUMN age;
+
+SHOW TABLES LIKE 'a%';
