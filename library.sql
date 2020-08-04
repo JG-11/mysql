@@ -267,3 +267,11 @@ UPDATE books SET `year`= 1940 WHERE book_id = 5;
 
 --TRUNCATE (delete table content)
 TRUNCATE operations;
+
+--Super query (add intelligence to columns) 
+SELECT nationality, COUNT(book_id) AS total, SUM(IF(year <= 1950, 1, 0)) AS '<=1950',
+    SUM(IF(year > 1950 AND year <= 2000, 1, 0)) AS '<=2000',
+    SUM(IF(year > 2000, 1, 0)) AS '>2000'
+FROM books
+JOIN authors ON books.author_id = authors.author_id
+GROUP BY nationality;
