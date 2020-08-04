@@ -108,3 +108,8 @@ INSERT INTO books(author_id, title) VALUES(6, 'Cien sonetos de amor');
 INSERT INTO books(author_id, title) VALUES(
     (SELECT author_id FROM authors WHERE name = 'Pablo Neruda' LIMIT 1),
     'Confieso que he vivido');
+
+/*
+    Bash and SQL files
+    mysql -u root -p -h localhost -D library < data.sql
+*/
