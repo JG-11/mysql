@@ -294,3 +294,9 @@ ALTER TABLE authors MODIFY COLUMN age INTEGER UNSIGNED DEFAULT 80 AFTER name;
 ALTER TABLE authors DROP COLUMN age;
 
 SHOW TABLES LIKE 'a%';
+
+/*
+    Database backup:
+    1. With schema but no data: mysqldump -u root -p -h localhost -d library > schema.sql
+    2. With schema and data: mysqldump -u root -p -h localhost library > db.sql
+*/
