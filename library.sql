@@ -251,3 +251,19 @@ FROM operations AS o
 LEFT JOIN clients AS c ON o.client_id = c.client_id 
 LEFT JOIN books AS b ON o.book_id = b.book_id
 LEFT JOIN authors AS a ON b.author_id = a.author_id;
+
+--DELETE
+BEGIN; --We start the transaction
+DELETE FROM clients WHERE client_id = 9 LIMIT 1;
+ROLLBACK; --We revert the transaction. We can use commit instead
+
+--UPDATE
+UPDATE clients SET active = 1 WHERE client_id = 10;
+UPDATE books SET `year`= 1950 WHERE book_id = 1;
+UPDATE books SET `year`= 1970 WHERE book_id = 2;
+UPDATE books SET `year`= 2010 WHERE book_id = 3;
+UPDATE books SET `year`= 2005 WHERE book_id = 4;
+UPDATE books SET `year`= 1940 WHERE book_id = 5;
+
+--TRUNCATE (delete table content)
+TRUNCATE operations;
