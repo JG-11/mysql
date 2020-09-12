@@ -1,6 +1,6 @@
 # MySQL
 
-This repository is focused on a course I'm taking on Platzi: https://platzi.com/cursos/sql-mysql/. Notes and more will be published.
+This repository is focused on a course I took on Platzi: https://platzi.com/cursos/sql-mysql/. Notes and more will be published.
 
 > For this DBMS documentation, visit: https://dev.mysql.com/doc/
 
